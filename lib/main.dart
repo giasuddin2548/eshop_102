@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'E-Shop',
+      title: 'E-Shop Flutter',
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
