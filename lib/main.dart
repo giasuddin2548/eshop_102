@@ -1,16 +1,22 @@
 
 import 'dart:io';
 import 'package:final_project/utils/di.dart';
-import 'package:final_project/views/cart_screen.dart';
-import 'package:final_project/views/home_screen.dart';
-import 'package:final_project/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'models/hiveEntities/cart_model.dart';
+import 'views/all_screens.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(CartModelAdapter());
+  await Hive.openBox<CartModel>('SDFJSDFSD');
+
+
   runApp(const MyApp());
 }
 
@@ -33,6 +39,10 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/', page: ()=>SplashScreen()),
         GetPage(name: HomeScreen.routeName, page: ()=>HomeScreen()),
         GetPage(name: CartScreen.routeName, page: ()=>CartScreen()),
+        GetPage(name: CheckOutScreen.routeName, page: ()=>CheckOutScreen()),
+        GetPage(name: LoginScreen.routeName, page: ()=>LoginScreen()),
+        GetPage(name: RegistrationScreen.routeName, page: ()=>RegistrationScreen()),
+
       ],
 
     );
