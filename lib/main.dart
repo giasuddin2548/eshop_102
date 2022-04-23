@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'controllers/all_controller.dart';
 import 'models/hiveEntities/cart_model.dart';
 import 'views/all_screens.dart';
 
@@ -15,6 +17,8 @@ void main() async{
   await Hive.initFlutter();
   Hive.registerAdapter(CartModelAdapter());
   await Hive.openBox<CartModel>('SDFJSDFSD');
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await init(prefs);
 
 
   runApp(const MyApp());
@@ -25,14 +29,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GetBuilder<ThemeController>(builder: (controller) => GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'E-Shop Flutter Mobile App',
-      theme: ThemeData(
+      theme: controller.isDark==false?ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.amber,
+      ):ThemeData(
+        brightness: Brightness.dark,
       ),
-      // home:  HomeScreen(),
-      initialBinding: MyDI(),
       builder: EasyLoading.init(),
       smartManagement: SmartManagement.full,
       getPages: [
@@ -45,7 +50,7 @@ class MyApp extends StatelessWidget {
 
       ],
 
-    );
+    ),);
   }
 
 

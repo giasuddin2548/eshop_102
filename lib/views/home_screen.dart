@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
 
 
 
+
   // String name2=null;
   String? name1;
   late String name3;
@@ -54,7 +55,19 @@ class HomeScreen extends StatelessWidget {
                   badgeContent:  Text(_cartController.cartData.length.toString(), style: const TextStyle(fontSize: 12),),
                   badgeColor: Colors.white,
                   showBadge: _cartController.cartData.isNotEmpty?true:false,
-                  child: const Icon(Icons.add_shopping_cart)) ))],
+                  child: const Icon(Icons.add_shopping_cart)) )),
+
+              GetBuilder<ThemeController>(builder: (theme) {
+              return IconButton(onPressed: (){
+                theme.changeMyTheme();
+              }, icon: theme.isDark==false?const Icon(Icons.dark_mode_outlined):const Icon(Icons.light_mode_outlined));
+
+            } ,)
+
+
+
+
+          ],
 
         ),
         SliverToBoxAdapter(
