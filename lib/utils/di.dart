@@ -1,15 +1,13 @@
 
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../controllers/all_controller.dart';
 
-class MyDI extends Bindings {
+Future<void> init(SharedPreferences sharedPreferences)async{
 
-  @override
-  void dependencies() {
-    Get.lazyPut<HomeScreenController>(() => HomeScreenController());
-    Get.lazyPut<CartController>(() => CartController());
-    Get.lazyPut<ProductDetailController>(() => ProductDetailController());
-    Get.lazyPut<LoginController>(() => LoginController());
-  }
-
+  Get.lazyPut<HomeScreenController>(() => HomeScreenController());
+  Get.lazyPut<CartController>(() => CartController());
+  Get.lazyPut<ProductDetailController>(() => ProductDetailController());
+  Get.lazyPut<LoginController>(() => LoginController());
+  Get.lazyPut<ThemeController>(() => ThemeController(sharedPreferences));
 }

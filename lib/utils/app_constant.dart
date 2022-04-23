@@ -7,6 +7,7 @@ class AppConstant{
   static String sharedPName='';
   static String sharedPIsLogin='JrFlutter_102_IsLogin';
   static String sharedToken='JrFlutter_102_Token';
+  static String sharedTheme='JrFlutter_102_Theme';
 
   static Color myMainColor(){
     return Color(0xff888826);
