@@ -11,6 +11,8 @@ class MyDI extends Bindings {
     Get.lazyPut<ProductDetailController>(() => ProductDetailController());
     Get.lazyPut<LoginController>(() => LoginController());
     Get.lazyPut<RegistrationController>(() => RegistrationController());
+
+
   }
 
 }

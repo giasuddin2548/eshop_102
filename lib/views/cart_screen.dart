@@ -415,7 +415,10 @@ class CartScreen extends StatelessWidget {
                       const Divider(color: Colors.white,),
                       InkWell(
                         onTap: (){
-                          bool exist=Get.find<LoginController>().userIsLoginIn.value;
+
+       
+                          bool exist=Get.put(LoginController()).userIsLoginIn.value;
+
 
                           if(exist==false){
                             Get.toNamed(LoginScreen.routeName);
