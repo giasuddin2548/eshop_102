@@ -1,10 +1,11 @@
 
 import 'package:badges/badges.dart';
+import 'package:final_project/controllers/all_controller.dart';
+import 'package:final_project/models/hiveEntities/cart_model.dart';
 import 'package:final_project/views/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
-import '../controllers/home_screen_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 ///https://stackoverflow.com/questions/60068435/what-is-null-safety-in-dart
@@ -12,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   static const routeName='/home_screen';
 
   final HomeScreenController _controller=Get.put(HomeScreenController());
+  final CartController _cartController=Get.put(CartController());
 
 
 
@@ -49,9 +51,9 @@ class HomeScreen extends StatelessWidget {
                 Get.toNamed(CartScreen.routeName);
 
               }, icon: Obx(()=>Badge(
-                  badgeContent:  Text(_controller.totalCartItem.value.toString(), style: const TextStyle(fontSize: 12),),
+                  badgeContent:  Text(_cartController.cartData.length.toString(), style: const TextStyle(fontSize: 12),),
                   badgeColor: Colors.white,
-                  showBadge: _controller.totalCartItem.value>0?true:false,
+                  showBadge: _cartController.cartData.isNotEmpty?true:false,
                   child: const Icon(Icons.add_shopping_cart)) ))],
 
         ),
@@ -152,17 +154,26 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
-                itemBuilder: (c, i)=>Container(
+                itemBuilder: (c, i)=>InkWell(
+                  onTap: (){
 
-                  margin: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(5),
+                 Get.find<CartController>().insertCartData(CartModel(productId: '$i', productImage: 'https://static.toiimg.com/photo/msid-87930581/87930581.jpg?211826', productName: 'Item-1', productQuantity: 1, productPrice: 10.5, ));
+
+
+
+                  },
+                  child: Container(
+
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    height: 220,
+                    width: 180,
+                    child: Center(child: Text('$i')),
+
                   ),
-                  height: 220,
-                  width: 180,
-                  child: Center(child: Text('$i')),
-
                 )),
           ),
         ),

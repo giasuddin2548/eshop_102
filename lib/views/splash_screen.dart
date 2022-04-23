@@ -1,9 +1,9 @@
 
 
+import 'package:final_project/views/all_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'home_screen.dart';
 
 class SplashScreen extends StatelessWidget {
 
@@ -53,6 +53,7 @@ class SplashScreen extends StatelessWidget {
     // Get.toNamed(HomeScreen.routeName);
     // Get.offAll(HomeScreen.routeName);
     Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+
 
 
 
