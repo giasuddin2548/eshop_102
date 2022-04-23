@@ -35,8 +35,15 @@ class MyApp extends StatelessWidget {
       theme: controller.isDark==false?ThemeData(
         brightness: Brightness.light,
         primarySwatch: Colors.amber,
+        backgroundColor: Colors.white,
+        accentColor: Colors.grey.withOpacity(0.1),
+        textSelectionColor: Colors.black54,
       ):ThemeData(
         brightness: Brightness.dark,
+        primarySwatch: Colors.amber,
+        backgroundColor: Colors.white,
+        accentColor: Colors.grey.withOpacity(0.1),
+        textSelectionColor: Colors.white,
       ),
       builder: EasyLoading.init(),
       smartManagement: SmartManagement.full,

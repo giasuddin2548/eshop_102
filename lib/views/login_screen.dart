@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/all_controller.dart';
 import '../controllers/cart_controller.dart';
 import '../utils/app_constant.dart';
+import 'all_screens.dart';
 
 //ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
@@ -187,6 +188,8 @@ class LoginScreen extends StatelessWidget {
                   height: 70,
                   child: TextButton(
                     onPressed: (){
+                      Get.toNamed(RegistrationScreen.routeName);
+
                     },
                     child: const Text('Create a new account'),
                   ),
