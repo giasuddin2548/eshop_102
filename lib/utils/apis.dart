@@ -6,6 +6,7 @@ class Apis{
   static String baseUrl='https://6ammart-admin.6amtech.com';
   static String getBannerData=baseUrl+'/api/v1/banners';
   static String getCategory=baseUrl+'/api/v1/categories';
+  static String getPopularProduct=baseUrl+'/api/v1/stores/popular';
 
 
 

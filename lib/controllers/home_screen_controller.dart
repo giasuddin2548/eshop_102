@@ -1,4 +1,5 @@
 
+import 'package:final_project/models/SixamMart/popularProduct/PopularProductModel.dart';
 import 'package:final_project/models/user.dart';
 import 'package:final_project/utils/apis.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -33,6 +34,7 @@ class HomeScreenController extends GetxController{
   var postList=<JsonHolderData>[].obs;
   var picSumDataList=<PicSumModel>[].obs;
   var categoryList=<CategoryModel>[].obs;
+  var popularProductList=<PopularProductModel>[].obs;
 
   RxObjectMixin<EshopCategoryModel> myEshopCategoryData=EshopCategoryModel().obs;
   RxObjectMixin<SliderModelClass> mySliderData=SliderModelClass().obs;
@@ -58,6 +60,7 @@ class HomeScreenController extends GetxController{
     // getEshopCategories();
     getEshopBanner();
     getCategories();
+    getPopularProducts();
     super.onInit();
   }
 
@@ -178,6 +181,63 @@ class HomeScreenController extends GetxController{
           // EasyLoading.showToast('Data Loading Success', duration: const Duration(seconds: 2), toastPosition:EasyLoadingToastPosition.bottom );
           categoryList.value=myReceivedData.map((e) => CategoryModel.fromJson(e)).toList();
           print('sdfsdfdsf ${categoryList.length}');
+
+
+
+
+        }else{
+          print('Failed to load data');
+        }
+      }
+    }catch(e){
+      print('Error occurred: $e');
+      EasyLoading.showError('Failed to Load data');
+    }finally{
+      isLoading.value=false;
+      EasyLoading.dismiss();
+
+    }
+  }
+  void getPopularProducts() async{
+
+    Dio  dio=Dio(BaseOptions(
+      baseUrl:Apis.baseUrl,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'zoneId': '1',
+        'moduleId': '1',
+        'X-localization': 'en',
+        'Authorization': 'Bearer null'
+
+
+
+      },
+    ));
+
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    try{
+
+      if (connectivityResult == ConnectivityResult.none) {
+        EasyLoading.showToast('No Internet Connection', duration: const Duration(seconds: 2));
+
+        print('No Internet Connection');
+      }else{
+
+        isLoading.value=true;
+        print('Internet Connected');
+        EasyLoading.show(status: 'loading...');
+
+        var response=await dio.get(Apis.getPopularProduct);
+
+        if(response.statusCode==200){
+
+          var myReceivedData=response.data as List;
+          isLoading.value=false;
+          print('sdfsdfdsf ${response.statusCode}');
+
+          // EasyLoading.showToast('Data Loading Success', duration: const Duration(seconds: 2), toastPosition:EasyLoadingToastPosition.bottom );
+          popularProductList.value=myReceivedData.map((e) => PopularProductModel.fromJson(e)).toList();
+          //print('shahin ${popularProductList.length}');
 
 
 

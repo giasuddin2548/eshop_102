@@ -217,13 +217,13 @@ class HomeScreen extends StatelessWidget {
             child: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
-                child: GridView.builder(
+                child: Obx(()=>GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2
                     ),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
+                    itemCount: _controller.categoryList.length,
                     itemBuilder: (c, i)=>Container(
 
                       margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
@@ -233,11 +233,28 @@ class HomeScreen extends StatelessWidget {
                       ),
                       height: 220,
                       width: 180,
-                      child: Center(child: Text('$i')),
+                      //child: Center(child: Text('$i')),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 120,
+                            width: 180,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: NetworkImage('${Apis.categoryImageUrl}${_controller.categoryList[i].image??'Name not found'}'))
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            height: 50,
+                            child: Center(child: Text(_controller.categoryList[i].name??'Name not found')),
+                          )
+                        ],
+                      ),
 
-                    ))),
+                    )))),
           ),
         ),
+
         SliverToBoxAdapter(
           child: Container(height: 5,),
         ),
