@@ -4,6 +4,7 @@ import 'package:final_project/controllers/all_controller.dart';
 import 'package:final_project/models/hiveEntities/cart_model.dart';
 import 'package:final_project/utils/apis.dart';
 import 'package:final_project/views/cart_screen.dart';
+import 'package:final_project/views/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -63,7 +64,10 @@ class HomeScreen extends StatelessWidget {
                 theme.changeMyTheme();
               }, icon: theme.isDark==false?const Icon(Icons.dark_mode_outlined):const Icon(Icons.light_mode_outlined));
 
-            } ,)
+            } ,),
+            IconButton(onPressed: (){
+              Get.toNamed(ChatScreen.rountename);
+            }, icon: const Icon(Icons.message))
 
 
 

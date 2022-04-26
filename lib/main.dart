@@ -1,6 +1,9 @@
 
 import 'dart:io';
 import 'package:final_project/utils/di.dart';
+import 'package:final_project/views/chat_screen.dart';
+import 'package:final_project/views/failed_screen.dart';
+import 'package:final_project/views/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -49,10 +52,13 @@ class MyApp extends StatelessWidget {
       smartManagement: SmartManagement.full,
       getPages: [
         GetPage(name: '/', page: ()=>SplashScreen()),
+        GetPage(name: SuccessScreen.rountename, page: ()=>SuccessScreen()),
+        GetPage(name: FailedScreen.rountename, page: ()=>FailedScreen()),
         GetPage(name: HomeScreen.routeName, page: ()=>HomeScreen()),
         GetPage(name: CartScreen.routeName, page: ()=>CartScreen()),
         GetPage(name: CheckOutScreen.routeName, page: ()=>CheckOutScreen()),
         GetPage(name: LoginScreen.routeName, page: ()=>LoginScreen()),
+        GetPage(name: ChatScreen.rountename, page: ()=>ChatScreen()),
         GetPage(name: RegistrationScreen.routeName, page: ()=>RegistrationScreen()),
 
       ],

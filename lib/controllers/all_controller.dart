@@ -5,3 +5,4 @@ export 'package:final_project/controllers/product_detail_controller.dart';
 export 'package:final_project/controllers/login_controller.dart';
 export 'package:final_project/controllers/theme_controller.dart';
 export 'package:final_project/controllers/registration_controller.dart';
+export 'package:final_project/controllers/chat_controller.dart';
