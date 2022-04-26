@@ -2,6 +2,7 @@
 import 'package:badges/badges.dart';
 import 'package:final_project/controllers/all_controller.dart';
 import 'package:final_project/models/hiveEntities/cart_model.dart';
+import 'package:final_project/utils/apis.dart';
 import 'package:final_project/views/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -104,7 +105,7 @@ class HomeScreen extends StatelessWidget {
             child: Obx(()=>ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: _controller.myEshopCategoryData.value.data?.length??0,
+                itemCount: _controller.categoryList.length,
                 itemBuilder: (c, i)=>Container(
 
                   margin: const EdgeInsets.all(5),
@@ -122,14 +123,14 @@ class HomeScreen extends StatelessWidget {
                         width: 100,
 
                         decoration: BoxDecoration(
-                           image: DecorationImage(image: NetworkImage(_controller.myEshopCategoryData.value.data![i].image??'Name not found'))
+                           image: DecorationImage(image: NetworkImage('${Apis.categoryImageUrl}${_controller.categoryList[i].image??'Name not found'}'))
                         ),
                       ),
                       SizedBox(
                         height: 30,
                         width: 100,
 
-                        child: Center(child: Text(_controller.myEshopCategoryData.value.data![i].name??'Name not found')),
+                        child: Center(child: Text(_controller.categoryList[i].name??'Name not found')),
                       ),
                       // Center(child: Text(_controller.myEshopCategoryData.value.data![i].name??'Name not found'))
                     ],
@@ -216,13 +217,13 @@ class HomeScreen extends StatelessWidget {
             child: MediaQuery.removePadding(
                 removeTop: true,
                 context: context,
-                child: GridView.builder(
+                child: Obx(()=>GridView.builder(
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2
                     ),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: 10,
+                    itemCount: _controller.categoryList.length,
                     itemBuilder: (c, i)=>Container(
 
                       margin: const EdgeInsets.only(top: 5, left: 5, right: 5),
@@ -232,11 +233,28 @@ class HomeScreen extends StatelessWidget {
                       ),
                       height: 220,
                       width: 180,
-                      child: Center(child: Text('$i')),
+                      //child: Center(child: Text('$i')),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: 120,
+                            width: 180,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(image: NetworkImage('${Apis.categoryImageUrl}${_controller.categoryList[i].image??'Name not found'}'))
+                            ),
+                          ),
+                          Container(
+                            width: 180,
+                            height: 50,
+                            child: Center(child: Text(_controller.categoryList[i].name??'Name not found')),
+                          )
+                        ],
+                      ),
 
-                    ))),
+                    )))),
           ),
         ),
+
         SliverToBoxAdapter(
           child: Container(height: 5,),
         ),
@@ -443,11 +461,11 @@ class HomeScreen extends StatelessWidget {
         children: [
           Obx(()=>_controller.isLoading==true?Container(): CarouselSlider.builder(
 
-            itemCount: _controller.mySliderData.value.data?.length??0,
+            itemCount: _controller.bannerData.value.banners?.length??0,
             itemBuilder: (context, index, realIndex) => SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.width/3,
-              child: Image.network(_controller.mySliderData.value.data![index].image??'',fit: BoxFit.cover, ),
+              child: Image.network('${Apis.bannerImageUrl}${_controller.bannerData.value.banners![index].image??''}',fit: BoxFit.cover, ),
             ),
 
             options: CarouselOptions(
@@ -474,8 +492,8 @@ class HomeScreen extends StatelessWidget {
               bottom: 10,
               left: (MediaQuery.of(context).size.width-25)/2,
               child: Obx(()=>_controller.isLoading==true?Container(): Row(
-                children: _controller.mySliderData.value.data!.map((e) {
-                  var currentIndex=_controller.mySliderData.value.data?.indexOf(e);
+                children: _controller.bannerData.value.banners!.map((e) {
+                  var currentIndex=_controller.bannerData.value.banners?.indexOf(e);
                   return Container(
                     margin: const EdgeInsets.only(left: 5),
                     height: 10,
