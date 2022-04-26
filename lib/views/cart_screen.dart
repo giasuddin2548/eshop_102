@@ -418,13 +418,13 @@ class CartScreen extends StatelessWidget {
 
        
                           bool exist=Get.put(LoginController()).userIsLoginIn.value;
+                          Get.toNamed(CheckOutScreen.routeName);
 
-
-                          if(exist==false){
-                            Get.toNamed(LoginScreen.routeName);
-                          }else{
-                            Get.toNamed(CheckOutScreen.routeName);
-                          }
+                          // if(exist==false){
+                          //   Get.toNamed(LoginScreen.routeName);
+                          // }else{
+                          //   Get.toNamed(CheckOutScreen.routeName);
+                          // }
                         },
 
                         child: Container(
